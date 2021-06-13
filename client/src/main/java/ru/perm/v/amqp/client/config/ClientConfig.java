@@ -9,6 +9,7 @@ import org.springframework.amqp.remoting.client.AmqpProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ru.perm.v.amqp.service.CountryService;
 import ru.perm.v.amqp.service.PersonService;
 import ru.perm.v.amqp.service.TownService;
 
@@ -19,12 +20,17 @@ public class ClientConfig {
 
     @Bean
     Queue townQueue() {
-        return new Queue(TownService.class.getSimpleName(), true);
+        return new Queue(TownService.class.getSimpleName());
     }
 
     @Bean
     Queue personQueue() {
-        return new Queue(PersonService.class.getSimpleName(), true);
+        return new Queue(PersonService.class.getSimpleName());
+    }
+
+    @Bean
+    Queue countryQueue() {
+        return new Queue(CountryService.class.getSimpleName());
     }
 
     @Bean
@@ -33,7 +39,7 @@ public class ClientConfig {
     }
 
     @Bean
-    AmqpProxyFactoryBean amqpTownService(AmqpTemplate amqpTemplate) {
+    AmqpProxyFactoryBean townServiceAmqp(AmqpTemplate amqpTemplate) {
         AmqpProxyFactoryBean factoryBean = new AmqpProxyFactoryBean();
         factoryBean.setAmqpTemplate(amqpTemplate);
         factoryBean.setServiceInterface(TownService.class);
@@ -42,11 +48,20 @@ public class ClientConfig {
     }
 
     @Bean
-    AmqpProxyFactoryBean amqpPersonService(AmqpTemplate amqpTemplate) {
+    AmqpProxyFactoryBean personServiceAmqp(AmqpTemplate amqpTemplate) {
         AmqpProxyFactoryBean factoryBean = new AmqpProxyFactoryBean();
         factoryBean.setAmqpTemplate(amqpTemplate);
         factoryBean.setServiceInterface(PersonService.class);
         factoryBean.setRoutingKey(PersonService.class.getSimpleName());
+        return factoryBean;
+    }
+
+    @Bean
+    AmqpProxyFactoryBean countryServiceAmqp(AmqpTemplate amqpTemplate) {
+        AmqpProxyFactoryBean factoryBean = new AmqpProxyFactoryBean();
+        factoryBean.setAmqpTemplate(amqpTemplate);
+        factoryBean.setServiceInterface(CountryService.class);
+        factoryBean.setRoutingKey(CountryService.class.getSimpleName());
         return factoryBean;
     }
 
@@ -69,6 +84,14 @@ public class ClientConfig {
                 .bind(queue)
                 .to(exchange)
                 .with(PersonService.class.getSimpleName());
+    }
+
+    @Bean
+    Binding countryBinding(@Qualifier("countryQueue") Queue queue, DirectExchange exchange) {
+        return BindingBuilder
+                .bind(queue)
+                .to(exchange)
+                .with(CountryService.class.getSimpleName());
     }
 
     @Bean

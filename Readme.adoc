@@ -8,10 +8,10 @@
 
 |===
 |Название |Назначение
-|link:service-interface/[service-interface]| Общий модуль. Содержит сущности xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Person.java[Person], xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Town.java[Town] и описание интерфейсов RPC сервисов xref:service-interface/src/main/java/ru/perm/v/amqp/service/PersonService.java[PersonService], xref:service-interface/src/main/java/ru/perm/v/amqp/service/TownService.java[TownService]
+|link:service-interface/[service-interface]| Общий модуль. Содержит сущности xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Person.java[Person], xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Town.java[Town], xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Country.java[Country] и описание интерфейсов RPC сервисов xref:service-interface/src/main/java/ru/perm/v/amqp/service/PersonService.java[PersonService], xref:service-interface/src/main/java/ru/perm/v/amqp/service/TownService.java[TownService], xref:service-interface/src/main/java/ru/perm/v/amqp/service/CountryService.java[CountryService]
 |link:client/[client]| RestController для вызова удаленных процедур
 |link:person-service/[person-service]| Реализация сервиса PersonService
-|link:town-service/[town-service]| Реализация сервиса TownService
+|link:town-service/[town-service]| Реализация сервисов TownService,CountryService
 |===
 
 xref:rabbitmq-run.sh[rabbitmq-run.sh] - скрипт запуска RabbitMQ в docker. Имя и пароль для доступа _guest_
@@ -53,6 +53,9 @@ xref:rabbitmq-run.sh[rabbitmq-run.sh] - скрипт запуска RabbitMQ в 
 - GET /towm/all
 - GET /towm/1
 - GET /towm/2
+- GET /country/all
+- GET /country/1
+- GET /country/2
 - GET /person/all
 - GET /person/1
 - GET /person/2
