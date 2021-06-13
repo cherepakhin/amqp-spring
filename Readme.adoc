@@ -8,10 +8,10 @@
 
 |===
 |Название |Назначение
-|xref:service-interface/[service-interface]| Общий модуль. Содержит сущности xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Person.java[Person], xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Town.java[Town] и описание интерфейсов RPC сервисов xref:service-interface/src/main/java/ru/perm/v/amqp/service/PersonService.java[PersonService], xref:service-interface/src/main/java/ru/perm/v/amqp/service/TownService.java[TownService]
-|xref:client/[client]| RestController для вызова удаленных процедур
-|xref:person-service/[person-service]| Реализация сервиса PersonService
-|xref:town-service/[town-service]| Реализация сервиса TownService
+|link:file:service-interface/[service-interface]| Общий модуль. Содержит сущности xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Person.java[Person], xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Town.java[Town] и описание интерфейсов RPC сервисов xref:service-interface/src/main/java/ru/perm/v/amqp/service/PersonService.java[PersonService], xref:service-interface/src/main/java/ru/perm/v/amqp/service/TownService.java[TownService]
+|link:file:client/[client]| RestController для вызова удаленных процедур
+|link:file:person-service/[person-service]| Реализация сервиса PersonService
+|link:file:town-service/[town-service]| Реализация сервиса TownService
 |===
 
 xref:rabbitmq-run.sh[rabbitmq-run.sh] - скрипт запуска RabbitMQ в docker. Имя и пароль для доступа _guest_
@@ -64,3 +64,8 @@ xref:rabbitmq-run.sh[rabbitmq-run.sh] - скрипт запуска RabbitMQ в 
 https://clck.ru/VV4sj
 
 image::doc/pyload-test.png[]
+
+==== Ссылки
+- https://docs.spring.io/spring-amqp/docs/current/reference/html/
+- https://habr.com/ru/post/262069/
+- https://www.baeldung.com/spring-remoting-amqp
