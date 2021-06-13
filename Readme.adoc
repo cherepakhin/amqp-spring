@@ -10,7 +10,7 @@
 |Название |Назначение
 |link:service-interface/[service-interface]| Общий модуль. Содержит сущности xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Person.java[Person], xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Town.java[Town] и описание интерфейсов RPC сервисов xref:service-interface/src/main/java/ru/perm/v/amqp/service/PersonService.java[PersonService], xref:service-interface/src/main/java/ru/perm/v/amqp/service/TownService.java[TownService]
 |link:client/[client]| RestController для вызова удаленных процедур
-|link:file:person-service/[person-service]| Реализация сервиса PersonService
+|link:person-service/[person-service]| Реализация сервиса PersonService
 |link:town-service/[town-service]| Реализация сервиса TownService
 |===
 
