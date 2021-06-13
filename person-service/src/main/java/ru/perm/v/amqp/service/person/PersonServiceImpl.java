@@ -23,6 +23,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> getAll() {
+        log.info("getAllPerson");
         return persons;
     }
 }

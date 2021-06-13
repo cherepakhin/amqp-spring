@@ -18,7 +18,7 @@ public class TownServiceImpl implements TownService {
 
     @Override
     public Town getById(Integer id) {
-        log.info("id:{}",id);
+        log.info("id:{}", id);
         return towns.stream().filter(t -> t.getId().equals(id)).findFirst().orElse(new Town(-1, "NOT FOUND"));
     }
 

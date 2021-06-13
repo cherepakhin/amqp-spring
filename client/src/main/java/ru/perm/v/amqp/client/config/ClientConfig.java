@@ -1,17 +1,13 @@
 package ru.perm.v.amqp.client.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.remoting.client.AmqpProxyFactoryBean;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.perm.v.amqp.service.CountryService;
-import ru.perm.v.amqp.service.PersonService;
-import ru.perm.v.amqp.service.TownService;
 
 @Configuration
 @Slf4j
@@ -36,71 +32,4 @@ public class ClientConfig {
         return template;
     }
 
-    // При объявлении через бин, очередь будет создаваться автоматом
-    @Bean
-    Queue townQueue() {
-        return new Queue(TownService.class.getSimpleName());
-    }
-
-    @Bean
-    AmqpProxyFactoryBean townServiceAmqp(AmqpTemplate amqpTemplate) {
-        AmqpProxyFactoryBean factoryBean = new AmqpProxyFactoryBean();
-        factoryBean.setAmqpTemplate(amqpTemplate);
-        factoryBean.setServiceInterface(TownService.class);
-        factoryBean.setRoutingKey(TownService.class.getSimpleName());
-        return factoryBean;
-    }
-
-    @Bean
-    Binding townBinding(@Qualifier("townQueue") Queue townQueue, DirectExchange exchange) {
-        return BindingBuilder
-                .bind(townQueue)
-                .to(exchange)
-                .with(TownService.class.getSimpleName());
-    }
-
-    @Bean
-    Queue personQueue() {
-        return new Queue(PersonService.class.getSimpleName());
-    }
-
-    @Bean
-    AmqpProxyFactoryBean personServiceAmqp(
-            AmqpTemplate amqpTemplate) {
-        AmqpProxyFactoryBean factoryBean = new AmqpProxyFactoryBean();
-        factoryBean.setAmqpTemplate(amqpTemplate);
-        factoryBean.setServiceInterface(PersonService.class);
-        factoryBean.setRoutingKey(PersonService.class.getSimpleName());
-        return factoryBean;
-    }
-
-    @Bean
-    Binding personBinding(@Qualifier("personQueue") Queue personQueue, DirectExchange exchange) {
-        return BindingBuilder
-                .bind(personQueue)
-                .to(exchange)
-                .with(PersonService.class.getSimpleName());
-    }
-
-    @Bean
-    Queue countryQueue() {
-        return new Queue(CountryService.class.getSimpleName());
-    }
-
-    @Bean
-    AmqpProxyFactoryBean countryServiceAmqp(AmqpTemplate amqpTemplate) {
-        AmqpProxyFactoryBean factoryBean = new AmqpProxyFactoryBean();
-        factoryBean.setAmqpTemplate(amqpTemplate);
-        factoryBean.setServiceInterface(CountryService.class);
-        factoryBean.setRoutingKey(CountryService.class.getSimpleName());
-        return factoryBean;
-    }
-
-    @Bean
-    Binding countryBinding(@Qualifier("countryQueue") Queue countryQueue, DirectExchange exchange) {
-        return BindingBuilder
-                .bind(countryQueue)
-                .to(exchange)
-                .with(CountryService.class.getSimpleName());
-    }
 }
