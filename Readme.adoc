@@ -6,7 +6,6 @@
 
 *Модули*
 
-
 |===
 |Название |Назначение
 |xref:service-interface/[service-interface]| Общий модуль. Содержит сущности xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Person.java[Person], xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Town.java[Town] и описание интерфейсов RPC сервисов xref:service-interface/src/main/java/ru/perm/v/amqp/service/PersonService.java[PersonService], xref:service-interface/src/main/java/ru/perm/v/amqp/service/TownService.java[TownService]
@@ -60,7 +59,7 @@ xref:rabbitmq-run.sh[rabbitmq-run.sh] - скрипт запуска RabbitMQ в 
 
 *Нагрузочное тестирование*
 
-Все сервисы запущены в одном экземпляре на одной машине. Нагрузка 300 rps в течении 10сек
+Все сервисы запущены в одном экземпляре на одной машине. Нагрузка 300 rps в течении 10сек. Настройка теста для Яндекс-Танк в xref:tank/load.yaml[tank/load.yaml]
 
 https://clck.ru/VV4sj
 
