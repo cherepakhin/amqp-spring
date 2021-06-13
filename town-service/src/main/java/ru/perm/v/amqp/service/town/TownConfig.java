@@ -13,15 +13,6 @@ import ru.perm.v.amqp.service.TownService;
 
 @Configuration
 public class TownConfig {
-    @Bean
-    Queue townQueue() {
-        return new Queue(TownService.class.getSimpleName());
-    }
-
-    @Bean
-    Queue countryQueue() {
-        return new Queue(CountryService.class.getSimpleName());
-    }
 
     @Bean
     AmqpInvokerServiceExporter townExporter(TownService townService, AmqpTemplate template) {
@@ -42,14 +33,26 @@ public class TownConfig {
     }
 
     @Bean
+    Queue townQueue() {
+        return new Queue(TownService.class.getSimpleName());
+    }
+
+    @Bean
     SimpleMessageListenerContainer townListener(
             ConnectionFactory factory,
             @Qualifier("townExporter") AmqpInvokerServiceExporter townExporter,
             @Qualifier("townQueue") Queue townQueue) {
+
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(factory);
         container.setMessageListener(townExporter);
         container.setQueueNames(townQueue.getName());
         return container;
+    }
+
+    // При объявлении через бин, очередь будет создаваться автоматом
+    @Bean
+    Queue countryQueue() {
+        return new Queue(CountryService.class.getSimpleName());
     }
 
     @Bean
