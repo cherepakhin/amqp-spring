@@ -1,0 +1,21 @@
+overload:
+  enabled: true
+  package: yandextank.plugins.DataUploader
+  token_file: "token.txt"
+  job_name: amqp const(300, 10s)
+phantom:
+  enabled: true
+  package: yandextank.plugins.Phantom
+  writelog: all
+  address: 192.168.1.10
+  port: "8080"
+  uris:
+    - "/town/all"
+    - "/person/all"
+  load_profile:
+    load_type: rps
+    schedule: const(300, 10s)
+console:
+  enabled: true
+telegraf:
+  enabled: false
