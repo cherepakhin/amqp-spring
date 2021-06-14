@@ -4,25 +4,27 @@
 
 Организовать RPC используя Spring AmqpInvokerServiceExporter через RabbitMQ
 
-*Модули*
+==== Модули
 
 |===
 |Название |Назначение
-|link:service-interface/[service-interface]| Общий модуль.
-Содержит сущности xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Person.java[Person], xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Town.java[Town], xref:service-interface/src/main/java/ru/perm/v/amqp/entity/Country.java[Country] и описание интерфейсов RPC сервисов xref:service-interface/src/main/java/ru/perm/v/amqp/service/PersonService.java[PersonService], xref:service-interface/src/main/java/ru/perm/v/amqp/service/TownService.java[TownService], xref:service-interface/src/main/java/ru/perm/v/amqp/service/CountryService.java[CountryService]
-|link:client/[client]| RestController для вызова удаленных процедур
-|link:person-service/[person-service]| Реализация сервиса PersonService
-|link:town-service/[town-service]| Реализация сервисов TownService,CountryService
+|link:dto-interface/[dto-interface]| Общий модуль.
+Содержит сущности xref:dto-interface/src/main/java/ru/perm/v/amqp/dto/Person.java[Person], xref:dto-interface/src/main/java/ru/perm/v/amqp/dto/Town.java[Town], xref:dto-interface/src/main/java/ru/perm/v/amqp/dto/Country.java[Country] и интерфейсы RPC сервисов xref:dto-interface/src/main/java/ru/perm/v/amqp/service/PersonService.java[PersonService], xref:dto-interface/src/main/java/ru/perm/v/amqp/service/TownService.java[TownService], xref:dto-interface/src/main/java/ru/perm/v/amqp/service/CountryService.java[CountryService]
+|link:client-app/[client-app]| RestController для вызова удаленных процедур
+|link:person-app/[person-app]| Реализация сервиса PersonService
+|link:town-country-app/[town-country-app]| Реализация сервисов TownService, CountryService
 |===
 
 xref:rabbitmq-run.sh[rabbitmq-run.sh] - скрипт запуска RabbitMQ в docker.
 Имя и пароль для доступа _guest_
 
-*Описание работы*
+==== Описание работы
 
 Контроллер принимает запрос, через интерфейс сервиса делает RPC. Описание запроса попадает в очередь RabbitMQ. Слушатель в *-service принимает запрос, обрабатывает и отправляет ответ в RabbitMQ. Ответ отправляется в очередь ответов RabbitMQ. Контроллер принимает ответ и отправляет потребителю.
 
-*Запуск*
+image::doc/amqp-dia.png[]
+
+==== Запуск
 
 1. Запустить RabbitMQ
 
@@ -30,27 +32,27 @@ xref:rabbitmq-run.sh[rabbitmq-run.sh] - скрипт запуска RabbitMQ в 
 
 2. Запустить принимающие сервисы
 
-    cd person-service
+    cd person-app
     mvn spring-boot:run
 
-    cd town-service
+    cd town-app
     mvn spring-boot:run
 
 3. Запустить контроллер.
 Настроен на порт 8080
 
-    cd client
+    cd client-app
     mvn spring-boot:run
 
-*Проверка работы*
+==== Проверка работы
 
 [source,bash]
 ----
- >curl 127.0.0.1:8080/town/1
+curl http://127.0.0.1:8080/town/1
 {"id":1,"name":"Perm"}
 ----
 
-**Endpoints**
+==== Endpoints
 
 - GET /towm/all
 - GET /towm/1
@@ -62,7 +64,7 @@ xref:rabbitmq-run.sh[rabbitmq-run.sh] - скрипт запуска RabbitMQ в 
 - GET /person/1
 - GET /person/2
 
-*Нагрузочное тестирование*
+==== Нагрузочное тестирование
 
 Все сервисы запущены в одном экземпляре на одной машине.
 Нагрузка 300 rps в течении 10сек.

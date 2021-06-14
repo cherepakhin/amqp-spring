@@ -15,10 +15,10 @@
     </properties>
 
     <modules>
-        <module>service-interface</module>
-        <module>town-service</module>
-        <module>person-service</module>
-        <module>client</module>
+        <module>dto-interface</module>
+        <module>town-country-app</module>
+        <module>person-app</module>
+        <module>client-app</module>
     </modules>
 
     <parent>
