@@ -14,7 +14,7 @@ public class TownServiceConfig {
     // При объявлении через бин, очередь будет создаваться автоматом
     @Bean
     Queue townQueue() {
-        return new Queue(TownService.class.getSimpleName());
+        return new Queue(TownService.class.getSimpleName() + "Queue");
     }
 
     @Bean

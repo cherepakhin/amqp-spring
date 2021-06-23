@@ -14,7 +14,7 @@ public class PersonServiceConfig {
 
     @Bean
     Queue personQueue() {
-        return new Queue(PersonService.class.getSimpleName());
+        return new Queue(PersonService.class.getSimpleName()+"Queue");
     }
 
     @Bean

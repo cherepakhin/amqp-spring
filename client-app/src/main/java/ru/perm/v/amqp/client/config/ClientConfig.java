@@ -6,8 +6,15 @@ import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ru.perm.v.amqp.service.CountryService;
+import ru.perm.v.amqp.service.PersonService;
+import ru.perm.v.amqp.service.TownService;
+
+import static java.util.Arrays.asList;
 
 @Configuration
 @Slf4j
@@ -31,5 +38,4 @@ public class ClientConfig {
         template.setExchange(EXCHANGE);
         return template;
     }
-
 }

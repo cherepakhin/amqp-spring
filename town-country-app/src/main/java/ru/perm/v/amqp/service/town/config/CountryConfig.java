@@ -1,4 +1,4 @@
-package ru.perm.v.amqp.service.town;
+package ru.perm.v.amqp.service.town.config;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Queue;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.perm.v.amqp.service.CountryService;
 
-@Configuration
+//@Configuration
 public class CountryConfig {
 
     @Bean

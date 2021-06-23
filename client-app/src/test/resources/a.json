@@ -1,0 +1,4 @@
+{"target":"bpmadapter",
+"sender":"md-ordersstv-detail",
+"data":{
+    "method":"submit-form","target":"/api/bpm/engine/default/task/ee75c30c-cf6a-11eb-851c-0a580af40746/submit-form","body":{"variables":{"cmd":{"value":"agree","type":"string"}}},"jsonrpc":"2.0","id":"1323b690-cf6b-11eb-9ed2-4b8832a79d61"}}

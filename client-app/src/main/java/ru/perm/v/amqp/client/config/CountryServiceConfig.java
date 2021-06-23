@@ -13,7 +13,7 @@ import ru.perm.v.amqp.service.CountryService;
 public class CountryServiceConfig {
     @Bean
     Queue countryQueue() {
-        return new Queue(CountryService.class.getSimpleName());
+        return new Queue(CountryService.class.getSimpleName()+"Queue");
     }
 
     @Bean
